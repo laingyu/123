@@ -11,20 +11,21 @@
 '''
 import random
 #  范围
-num =random.randint(0,5) # 随机一个区间【a,b】的数赋给num
 moeny =100
-while 1:
-    a=input("你猜，[0，5]的一个数：")  #  输入你猜的数，自动为str类型
-    a=int (a)  # 把str类型转变为int类型，以用来比较
-    moeny=moeny-10
+while moeny:
+    num =random.randint(0,5) # 随机一个区间【a,b】的数赋给num
+    while 1:
+        a=input("你猜，[0，5]的一个数：")  #  输入你猜的数，自动为str类型
+        a=int (a)  # 把str类型转变为int类型，以用来比较
+        moeny=moeny-10
 
-    if a==num :
-        print("恭喜您，猜对了！")
-        break
-    elif moeny==0 :
-        print("您没钱辣！")
-        break
-    elif a>num :
-        print("你猜大了")
-    else:
-        print("你猜小咯")
+        if a==num :
+            print("恭喜您，猜对了！")
+            break
+        elif moeny==0 :
+            print("您没钱辣！")
+            break
+        elif a>num :
+            print("你猜大了")
+        else:
+            print("你猜小咯")
