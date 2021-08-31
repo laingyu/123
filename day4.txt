@@ -1,0 +1,147 @@
+'''
+要求：
+dict = {"k1":"v1","k2":"v2","k3":"v3"}
+#1、请循环遍历出所有的key
+#2、请循环遍历出所有的value
+# 3、请在字典中增加一个键值对,"k4":"v4"
+'''
+
+dict ={"k1":"v1","k2":"v2","k3":"v3"}
+print(dict.keys())             #打印出所有的key
+print(dict.values())           #打印出所有的value
+print(dict)                    #打印字典dict的所有键值对
+#循环遍历出所有的key
+#循环遍历出所有的value
+list_key   = list(dict.keys())
+for i in  range(len(list_key)):
+    print(list_key[i],end="\t")
+print("")
+list_value = list(dict.values())
+for i in range(len(list_value)) :
+    print(list_value[i],end='\t')
+print("")
+#增加元素
+dict["k4"]= "v4"
+print(dict)
+
+'''
+要求：
+水果超市：
+        1、通过水果名称查询水果单价
+        2、计算客户清单上的花费的金额   结果写入字典中
+        客户清单用字典  {“name” ：{"fruits name " : int,.....}."money":int}
+'''
+Friuts = {
+    # '苹果':32.8 ,
+    # '香蕉':22   ,
+    # '葡萄':15.5
+    '苹果': 12.3     ,
+    '草莓': 4.5      ,
+    '香蕉': 6.3      ,
+    '葡萄': 5.8      ,
+    '橘子': 6.4      ,
+    '樱桃': 15.8
+}
+#通过水果名称查询水果单价
+print("--------------shop-------------------")
+while True :
+    name = input("输入水果名称或直接回车键退出:")
+    if name=='苹果':
+        print(name,'￥',Friuts[name])
+    elif name=='香蕉':
+        print(name,'￥',Friuts[name])
+    elif name=='葡萄':
+        print(name,'￥',Friuts[name])
+    elif name == '橘子':
+        print(name, '￥', Friuts[name])
+    elif name == '樱桃':
+        print(name, '￥', Friuts[name])
+    elif  name=='' :
+        print("--------感谢使用！购物愉快！-----------")
+        break
+    else:
+        print("没有该水果!请重新输入或者按回车键退出。")
+
+info = {
+    '小明':{
+        'fruits':{'苹果':4 ,'草莓':13,'香蕉':10},
+        'money':0
+    } ,
+    '小刚':{
+        'fruits':{'葡萄':19,'橘子':12,'樱桃':30},
+        'money' : 0
+    }
+}
+Friuts_key   = list(Friuts.keys())
+Friuts_value = list(Friuts.values())
+info_name   = list(info.keys())  #获取购买者小明、小刚,保存到列表info_name中备用
+#print(info_name)
+for i in range(len(info_name)) :     #读取购买者列表长度，一个一个买家的取出使用
+    info_ftuits = list(info[info_name[i]]['fruits'].keys())    #获取购物车的水果种类，保存到列表info_fruits中备用
+    #print(info_ftuits)
+    for x in range(len(info_ftuits)) :          #读取买家所买的水果列表长度，保证不遗漏每一种水果
+        for j in range(len(Friuts_key)) :       #读取商店的水果列表长度，用于与客户的水果列表对比
+            if info_ftuits[x]==Friuts_key[j] :  #客户水果购物车中水果与店家所售水果对比，有：获取水果单价与数量，计算所需金额
+               #先将str类型转为float以便计算，将计算得到的金额赋值给购物清单中的money
+                info[info_name[i]]['money']=float(info[info_name[i]]['money'])
+                info[info_name[i]]['money']=info[info_name[i]]['money']+\
+                                         float(info[info_name[i]]['fruits'][info_ftuits[x]])*float(Friuts_value[j])
+
+    #print(info[info_name[i]]['money'])
+
+print(info['小明'])
+print(info['小刚'])
+print(info)
+
+
+'''
+要求：
+编写一个函数，传入一个列表，并统计每个数字出现的次数。返回字典数据：{21:3,56:9,10:3}
+'''
+#遍历列表中的元素，返回字典类型，输出为：元素：出现个数
+def romove (list) :
+    mylist  = list
+    a = {}
+    for i in  mylist :
+        a[i]=mylist.count(i)
+    return  a
+# 建立一个元素为随机数[1,20]的列表
+y  =  []
+con  =  0
+l  =  int(input('列表长度：'))
+while con < l :
+    import random
+    y.append(random.randint(1,20))
+    con+=1
+print(romove(y))
+
+'''
+要求：
+有以下公司员工信息，将数据转换为字典方式（姓名作为键，其他作为值,张三:{xxx:xxx,xx:xxx}）
+# 姓名  年龄  性别  编号   任职公司   薪资   部门编号
+names = [
+    ["刘备","56","男","106","IBM", 500 ,"50"],
+    ["大乔","19","女","230","微软", 501 ,"60"],
+    ["小乔", "19", "女", "210", "Oracle", 600, "60"],
+    ["张飞", "45", "男", "230", "Tencent", 700 , "10"]
+]
+'''
+names = [
+    ['刘备','56','男','106','IBM',500,'50'],
+    ['大乔','19','女','230','微软',501,'60'],
+    ['小乔','19','女','210','Oracle',600,'60'],
+    ['张飞','45','男','230','Tencent',700,'10']
+]
+
+ID  =  {}
+for i in range(len(names)):
+    ID [names[i][0]]={
+        '年龄'   : names[i][1],
+        '性别'   : names[i][2],
+        '编号'   : names[i][3],
+        '任职公司': names[i][4],
+        '薪资'   : names[i][5],
+        '部门编号': names[i][6]
+    }
+print(ID)
+
