@@ -47,7 +47,7 @@ class shop (object):
                 for x in range(len(name)):
                     if data[1]==name[x]:
                         num[x]=num[x]+data[4]  # 累计单种服装销售数量
-                        money[x]=money[0]+data[2]*data[4]  # 累计单种服装的销售金额
+                        money[x]=money[x]+data[2]*data[4]  # 累计单种服装的销售金额
         return name, num, money ,sum_num ,sum_money                # 返回服装名称列表、销售数量列表、销售额列表、总销售量、总销售金额
 
     def yue_zhanbi(self):              # 每个月每个类型衣服的月销售额占比
@@ -148,11 +148,18 @@ while True:
         sum=a.all_sum()      # 年销售额查询
         print("年销售额%s"% round(sum,2))
     elif choose == "2":
-        name, num, money,sum,sum1 = a.zhanbi()          # 每种衣服年销售占比分析查询（销售量占比、销售额占比）
+        name, num, money,sum_num,sum_money = a.zhanbi()          # 每种衣服年销售占比分析查询（销售量占比、销售额占比）
+        sum1 = 0.0
+        sum2 = 0.0
+        for i in range(len(name)):
+            sum1 = sum1 + num[i]
+            sum2 = sum2 + money[i]
+
         for y in range(len(name)):
             print("%s今年卖%s件，收入%s元" % (name[y], int(num[y]), round(money[y], 2)))
-            print("销售（件数）占:%s  销售（金额）占：%s" % ('{:.2%}'.format(num[y] / sum), '{:.2%}'.format(money[y] / sum1)))
+            print("销售（件数）占:%s  销售（金额）占：%s" % ('{:.2%}'.format(num[y]/sum_num), '{:.2%}'.format(money[y]/sum_money)))
             print("")
+
     elif choose == "3":
         a.yue_zhanbi()            # 每种衣服月销售占比查询
     elif choose == "4":
